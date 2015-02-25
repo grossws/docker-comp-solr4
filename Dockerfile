@@ -1,6 +1,7 @@
 FROM grossws/tomcat8
 MAINTAINER Konstantin Gribov <grossws@gmail.com>
 
+ENV XTYPE solr
 WORKDIR /opt
 
 # see https://www.apache.org/dist/lucene/KEYS
