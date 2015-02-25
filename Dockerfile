@@ -40,7 +40,7 @@ RUN NEAREST_SOLR_TGZ_URL=$(curl -sSL http://www.apache.org/dyn/closer.cgi/${SOLR
 	&& echo "Nearest mirror: $NEAREST_SOLR_TGZ_URL" \
 	&& curl -sSL $NEAREST_SOLR_TGZ_URL -o solr.tar.gz \
 	&& curl -sSL $SOLR_TGZ_URL.asc -o solr.tar.gz.asc \
-	&& gpg --verify solr.tar.gz.asc \
+	&& gpg --verify solr.tar.gz.asc solr.tar.gz \
 	&& tar xvf solr.tar.gz -C /opt/tomcat/lib --strip-components=4 solr-$SOLR_VERSION/example/lib/ext/\*.jar \
 	&& tar xvf solr.tar.gz -C /opt/solr --strip-components=2 solr-$SOLR_VERSION/dist/solr-$SOLR_VERSION.war \
 	&& tar xvf solr.tar.gz -C /opt/solr --strip-components=1 solr-$SOLR_VERSION/LICENSE.txt solr-$SOLR_VERSION/NOTICE.txt \ 
