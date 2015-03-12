@@ -27,7 +27,7 @@ RUN gpg --keyserver pgp.mit.edu --recv-keys \
 	75952CF677CC8173F8E254D6F1A1F48B521A0277 \
 	6B7DC27D3EEF44F3015074C5ABE9C5D21EFAFD39
 
-ENV SOLR_VERSION 4.10.3
+ENV SOLR_VERSION 4.10.4
 ENV SOLR_TGZ_URL https://www.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
 
 RUN NEAREST_SOLR_TGZ_URL=$(curl -sSL http://www.apache.org/dyn/closer.cgi/${SOLR_TGZ_URL#https://www.apache.org/dist/}\?asjson\=1 \
