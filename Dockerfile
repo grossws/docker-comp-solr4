@@ -29,15 +29,11 @@ RUN gpg --keyserver pgp.mit.edu --recv-keys \
   EDF961FF03E647F9CA8A9C2C758051CCA3A13A7F
 
 ENV SOLR_VERSION 4.10.4
-ENV SOLR_TGZ_URL https://www.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
+ENV SOLR_TGZ_URL https://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
 
-RUN NEAREST_SOLR_TGZ_URL=$(curl -sSL http://www.apache.org/dyn/closer.cgi/${SOLR_TGZ_URL#https://www.apache.org/dist/}\?asjson\=1 \
-    | awk '/"path_info": / { pi=$2; }; /"preferred":/ { pref=$2; }; END { print pref " " pi; };' \
-    | sed -r -e 's/^"//; s/",$//; s/" "//') \
-  && sed -i 's/8080/8983/' /opt/tomcat/conf/server.xml \
+RUN sed -i 's/8080/8983/' /opt/tomcat/conf/server.xml \
   && mkdir -p /opt/solr/{data,conf,lib} \
-  && echo "Nearest mirror: $NEAREST_SOLR_TGZ_URL" \
-  && curl -sSL $NEAREST_SOLR_TGZ_URL -o solr.tar.gz \
+  && curl -sSL $SOLR_TGZ_URL -o solr.tar.gz \
   && curl -sSL $SOLR_TGZ_URL.asc -o solr.tar.gz.asc \
   && gpg --verify solr.tar.gz.asc solr.tar.gz \
   && tar xvf solr.tar.gz -C /opt/tomcat/lib --strip-components=4 solr-$SOLR_VERSION/example/lib/ext/\*.jar \
