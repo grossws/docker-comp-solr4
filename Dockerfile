@@ -1,7 +1,7 @@
 FROM grossws/tomcat8
 MAINTAINER Konstantin Gribov <grossws@gmail.com>
 
-ENV XTYPE solr
+ENV XTYPE=solr
 WORKDIR /opt
 
 ARG SOLR_VERSION=4.10.4
