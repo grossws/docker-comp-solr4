@@ -28,8 +28,8 @@ RUN gpg --keyserver pgp.mit.edu --recv-keys \
   6B7DC27D3EEF44F3015074C5ABE9C5D21EFAFD39 \
   EDF961FF03E647F9CA8A9C2C758051CCA3A13A7F
 
-ENV SOLR_VERSION 4.10.4
-ENV SOLR_TGZ_URL https://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
+ARG SOLR_VERSION=4.10.4
+ARG SOLR_TGZ_URL=https://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz
 
 RUN sed -i 's/8080/8983/' /opt/tomcat/conf/server.xml \
   && mkdir -p /opt/solr/{data,conf,lib} \
